@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constrainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/constrainLayout"
     android:background="@android:color/black"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -106,15 +106,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_end="0dp" />
+        app:layout_constraintGuide_end="50dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginStart="8dp"
         android:text="burhanrashid52"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toStartOf="@id/imgClose"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineBottom" />
 
 
@@ -122,9 +123,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginStart="8dp"
+        android:gravity="right"
         android:text="Burhanuddin Rashid"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@id/imgSave"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineBottom" />
 
 

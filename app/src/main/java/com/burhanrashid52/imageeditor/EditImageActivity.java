@@ -11,11 +11,16 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.provider.FontsContractCompat;
+import android.transition.ChangeBounds;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +50,8 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private StickerBSFragment mStickerBSFragment;
     private TextView mTxtCurrentTool;
     private Typeface mWonderFont;
+    private ConstraintLayout mConstraintLayout;
+    private boolean isVisible;
 
 
     /**
@@ -94,7 +101,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         mPhotoEditor = new PhotoEditor.Builder(this, mPhotoEditorView)
                 .setPinchTextScalable(true) // set flag to make text scalable when pinch
                 .setDefaultTextTypeface(mTextRobotoTf)
-                .setDefaultEmojiTypeface(mEmojiTypeFace)
+                //            .setDefaultEmojiTypeface(mEmojiTypeFace)
                 .build(); // build photo editor sdk
 
         mPhotoEditor.setOnPhotoEditorListener(this);
@@ -111,9 +118,11 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         ImageView imgSticker;
         ImageView imgEmo;
         ImageView imgSave;
+        ImageView imgClose;
 
         mPhotoEditorView = findViewById(R.id.photoEditorView);
         mTxtCurrentTool = findViewById(R.id.txtCurrentTool);
+        mConstraintLayout = findViewById(R.id.constrainLayout);
 
         imgEmo = findViewById(R.id.imgEmoji);
         imgEmo.setOnClickListener(this);
@@ -144,6 +153,9 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         imgSave = findViewById(R.id.imgSave);
         imgSave.setOnClickListener(this);
+
+        imgClose = findViewById(R.id.imgClose);
+        imgClose.setOnClickListener(this);
     }
 
     @Override
@@ -209,6 +221,10 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 mPhotoEditor.redo();
                 break;
 
+            case R.id.imgClose:
+                toggleAboutMe();
+                break;
+
             case R.id.imgSave:
                 saveImage();
                 break;
@@ -233,6 +249,19 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_REQUEST);
                 break;
         }
+    }
+
+    private void toggleAboutMe() {
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(this, isVisible ? R.layout.activity_about_edit_image : R.layout.activity_edit_image);
+
+        ChangeBounds transition = new ChangeBounds();
+        transition.setInterpolator(new AnticipateOvershootInterpolator(1.0f));
+        transition.setDuration(1200);
+
+        TransitionManager.beginDelayedTransition(mConstraintLayout, transition);
+        constraintSet.applyTo(mConstraintLayout);
+        isVisible = !isVisible;
     }
 
     @SuppressLint("MissingPermission")
