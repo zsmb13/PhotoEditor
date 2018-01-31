@@ -2,7 +2,9 @@ package com.burhanrashid52.imageeditor;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -13,9 +15,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.provider.FontsContractCompat;
 import android.transition.ChangeBounds;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -51,7 +51,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private TextView mTxtCurrentTool;
     private Typeface mWonderFont;
     private ConstraintLayout mConstraintLayout;
-    private boolean isVisible;
+    private boolean isVisible = true;
 
 
     /**
@@ -101,7 +101,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         mPhotoEditor = new PhotoEditor.Builder(this, mPhotoEditorView)
                 .setPinchTextScalable(true) // set flag to make text scalable when pinch
                 .setDefaultTextTypeface(mTextRobotoTf)
-                //            .setDefaultEmojiTypeface(mEmojiTypeFace)
+                //.setDefaultEmojiTypeface(mEmojiTypeFace)
                 .build(); // build photo editor sdk
 
         mPhotoEditor.setOnPhotoEditorListener(this);
@@ -119,6 +119,9 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         ImageView imgEmo;
         ImageView imgSave;
         ImageView imgClose;
+        ImageView imgInfo;
+
+        TextView txtTwitter, txtFacebook;
 
         mPhotoEditorView = findViewById(R.id.photoEditorView);
         mTxtCurrentTool = findViewById(R.id.txtCurrentTool);
@@ -156,6 +159,15 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         imgClose = findViewById(R.id.imgClose);
         imgClose.setOnClickListener(this);
+
+        imgInfo = findViewById(R.id.imgInfo);
+        imgInfo.setOnClickListener(this);
+
+        txtTwitter = findViewById(R.id.txtTwitter);
+        txtTwitter.setOnClickListener(this);
+
+        txtFacebook = findViewById(R.id.txtFacebook);
+        txtFacebook.setOnClickListener(this);
     }
 
     @Override
@@ -196,6 +208,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         switch (view.getId()) {
             case R.id.imgPencil:
                 mPhotoEditor.setBrushDrawingMode(true);
+                mTxtCurrentTool.setText(R.string.label_brush);
                 mPropertiesBSFragment.show(getSupportFragmentManager(), mPropertiesBSFragment.getTag());
                 break;
             case R.id.btnEraser:
@@ -222,11 +235,27 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 break;
 
             case R.id.imgClose:
+                if (!mPhotoEditor.isCacheEmpty()) {
+                    showSaveDialog();
+                } else {
+                    finishAffinity();
+                }
+                break;
+
+            case R.id.imgInfo:
                 toggleAboutMe();
                 break;
 
             case R.id.imgSave:
                 saveImage();
+                break;
+
+            case R.id.txtTwitter:
+                openUrl("http://www.twitter.com/burhanrashid52");
+                break;
+
+            case R.id.txtFacebook:
+                openUrl("http://www.facebook.com/Bursid");
                 break;
 
             case R.id.imgSticker:
@@ -251,13 +280,18 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         }
     }
 
+    private void openUrl(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
+    }
+
     private void toggleAboutMe() {
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(this, isVisible ? R.layout.activity_about_edit_image : R.layout.activity_edit_image);
 
         ChangeBounds transition = new ChangeBounds();
         transition.setInterpolator(new AnticipateOvershootInterpolator(1.0f));
-        transition.setDuration(1200);
+        transition.setDuration(800);
 
         TransitionManager.beginDelayedTransition(mConstraintLayout, transition);
         constraintSet.applyTo(mConstraintLayout);
@@ -352,5 +386,31 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         if (isGranted) {
             saveImage();
         }
+    }
+
+    private void showSaveDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you want to exit without saving image ?");
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                saveImage();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNeutralButton("Discard", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finishAffinity();
+            }
+        });
+        builder.create().show();
+
     }
 }

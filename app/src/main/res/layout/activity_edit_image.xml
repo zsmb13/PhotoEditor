@@ -66,7 +66,8 @@
         android:padding="8dp"
         android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineBottom"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_marginStart="64dp" />
 
     <include
         android:id="@+id/constraintTools"
@@ -97,7 +98,8 @@
         android:src="@drawable/ic_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_marginEnd="64dp" />
 
 
     <android.support.constraint.Guideline
@@ -109,23 +111,77 @@
         app:layout_constraintGuide_end="0dp" />
 
     <TextView
+        android:id="@+id/txtMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="burhanrashid52"
+        android:layout_marginStart="8dp"
+        android:drawablePadding="8dp"
+        android:text="@string/version_0_1_0"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/about_txt_size"
+        app:layout_constraintStart_toEndOf="@id/imgSave"
+        app:layout_constraintTop_toBottomOf="@id/txtStack" />
+
+
+    <TextView
+        android:id="@+id/txtStack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginStart="8dp"
+        android:drawablePadding="8dp"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/about_txt_size"
+        app:layout_constraintStart_toEndOf="@id/imgSave"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottom" />
+
+
+    <TextView
+        android:id="@+id/txtTwitter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="8dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_twitter"
+        android:text=" @burhanrashid52"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/about_txt_size"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@id/imgClose"
         app:layout_constraintTop_toBottomOf="@id/guidelineBottom" />
 
 
     <TextView
+        android:id="@+id/txtFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginEnd="8dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/ic_facebook"
         android:text="Burhanuddin Rashid"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@id/imgSave"
-        app:layout_constraintTop_toBottomOf="@id/guidelineBottom" />
+
+        android:textSize="@dimen/about_txt_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imgClose"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/txtTwitter" />
+
+
+    <ImageView
+        android:id="@+id/imgInfo"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="#99000000"
+        android:padding="8dp"
+        android:src="@drawable/ic_info"
+        app:layout_constraintBottom_toTopOf="@+id/constraintTools"
+        app:layout_constraintEnd_toStartOf="@id/imgUndo"
+        app:layout_constraintStart_toEndOf="@id/imgCamera" />
 
 
 </android.support.constraint.ConstraintLayout>
