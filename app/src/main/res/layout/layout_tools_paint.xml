@@ -15,10 +15,8 @@
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_brush"
         app:layout_constraintEnd_toStartOf="@+id/imgText"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,6 +28,16 @@
         app:layout_constraintStart_toStartOf="@+id/imgPencil"
         app:layout_constraintTop_toBottomOf="@+id/imgPencil" />
 
+    <ImageView
+        android:id="@+id/imgText"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_text"
+        app:layout_constraintEnd_toStartOf="@+id/btnEraser"
+        app:layout_constraintStart_toEndOf="@+id/imgPencil" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,6 +47,17 @@
         app:layout_constraintEnd_toEndOf="@+id/imgText"
         app:layout_constraintStart_toStartOf="@+id/imgText"
         app:layout_constraintTop_toBottomOf="@+id/imgText" />
+
+    <ImageView
+        android:id="@+id/btnEraser"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        android:src="@drawable/ic_eraser"
+        app:layout_constraintEnd_toStartOf="@+id/imgSticker"
+        app:layout_constraintStart_toEndOf="@+id/imgText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,30 +70,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnEraser" />
 
     <ImageView
-        android:id="@+id/imgText"
-        android:layout_width="@dimen/editor_size"
-        android:layout_height="@dimen/editor_size"
-        android:layout_margin="4dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_text"
-        app:layout_constraintEnd_toStartOf="@+id/btnEraser"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imgPencil"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <ImageView
-        android:id="@+id/btnEraser"
-        android:layout_width="@dimen/editor_size"
-        android:layout_height="@dimen/editor_size"
-        android:layout_margin="4dp"
-        android:layout_marginTop="8dp"
-        android:padding="4dp"
-        android:src="@drawable/ic_eraser"
-        app:layout_constraintEnd_toStartOf="@+id/imgSticker"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imgText" />
-
-    <ImageView
         android:id="@+id/imgSticker"
         android:layout_width="@dimen/editor_size"
         android:layout_height="@dimen/editor_size"
@@ -82,20 +77,7 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_sticker"
         app:layout_constraintEnd_toStartOf="@+id/imgEmoji"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnEraser" />
-
-    <ImageView
-        android:id="@+id/imgEmoji"
-        android:layout_width="@dimen/editor_size"
-        android:layout_height="@dimen/editor_size"
-        android:layout_margin="4dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_insert_emoticon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imgSticker"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -106,6 +88,16 @@
         app:layout_constraintEnd_toEndOf="@+id/imgSticker"
         app:layout_constraintStart_toStartOf="@+id/imgSticker"
         app:layout_constraintTop_toBottomOf="@+id/imgSticker" />
+
+    <ImageView
+        android:id="@+id/imgEmoji"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_insert_emoticon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgSticker" />
 
     <TextView
         android:layout_width="wrap_content"

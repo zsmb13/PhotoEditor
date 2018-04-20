@@ -10,6 +10,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:background="@android:color/white"
+        tools:background="#F00"
         tools:text="" />
 
 </RelativeLayout>
