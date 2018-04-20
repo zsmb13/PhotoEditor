@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -71,12 +70,6 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
         rvEmoji.setAdapter(stickerAdapter);
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
     public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHolder> {
 
         int[] stickerList = new int[]{R.drawable.aa, R.drawable.bb};
@@ -119,18 +112,4 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
         }
     }
 
-    private String convertEmoji(String emoji) {
-        String returnedEmoji = "";
-        try {
-            int convertEmojiToInt = Integer.parseInt(emoji.substring(2), 16);
-            returnedEmoji = getEmojiByUnicode(convertEmojiToInt);
-        } catch (NumberFormatException e) {
-            returnedEmoji = "";
-        }
-        return returnedEmoji;
-    }
-
-    private String getEmojiByUnicode(int unicode) {
-        return new String(Character.toChars(unicode));
-    }
 }

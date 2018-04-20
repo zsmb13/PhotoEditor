@@ -23,20 +23,17 @@ import java.util.List;
 
 public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.ViewHolder> {
 
-    private Context context;
     private LayoutInflater inflater;
     private List<Integer> colorPickerColors;
     private OnColorPickerClickListener onColorPickerClickListener;
 
     ColorPickerAdapter(@NonNull Context context, @NonNull List<Integer> colorPickerColors) {
-        this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.colorPickerColors = colorPickerColors;
     }
 
     ColorPickerAdapter(@NonNull Context context) {
         this(context, getDefaultColors(context));
-        this.context = context;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -54,28 +51,6 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
     @Override
     public int getItemCount() {
         return colorPickerColors.size();
-    }
-
-    private void buildColorPickerView(View view, int colorCode) {
-        view.setVisibility(View.VISIBLE);
-
-        ShapeDrawable biggerCircle = new ShapeDrawable(new OvalShape());
-        biggerCircle.setIntrinsicHeight(20);
-        biggerCircle.setIntrinsicWidth(20);
-        biggerCircle.setBounds(new Rect(0, 0, 20, 20));
-        biggerCircle.getPaint().setColor(colorCode);
-
-        ShapeDrawable smallerCircle = new ShapeDrawable(new OvalShape());
-        smallerCircle.setIntrinsicHeight(5);
-        smallerCircle.setIntrinsicWidth(5);
-        smallerCircle.setBounds(new Rect(0, 0, 5, 5));
-        smallerCircle.getPaint().setColor(Color.WHITE);
-        smallerCircle.setPadding(10, 10, 10, 10);
-        Drawable[] drawables = {smallerCircle, biggerCircle};
-
-        LayerDrawable layerDrawable = new LayerDrawable(drawables);
-
-        view.setBackgroundDrawable(layerDrawable);
     }
 
     public void setOnColorPickerClickListener(OnColorPickerClickListener onColorPickerClickListener) {

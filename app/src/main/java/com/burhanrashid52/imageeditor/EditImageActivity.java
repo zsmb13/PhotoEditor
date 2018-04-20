@@ -44,14 +44,10 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private EmojiBSFragment mEmojiBSFragment;
     private StickerBSFragment mStickerBSFragment;
     private TextView mTxtCurrentTool;
-    private Typeface mWonderFont;
 
 
     /**
      * launch editor with multiple image
-     *
-     * @param context
-     * @param imagesPath
      */
     public static void launch(Context context, ArrayList<String> imagesPath) {
         Intent starter = new Intent(context, EditImageActivity.class);
@@ -61,9 +57,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
     /**
      * launch editor with single image
-     *
-     * @param context
-     * @param imagePath
      */
     public static void launch(Context context, String imagePath) {
         ArrayList<String> imagePaths = new ArrayList<>();
@@ -79,17 +72,12 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         initViews();
 
-        mWonderFont = Typeface.createFromAsset(getAssets(), "beyond_wonderland.ttf");
-
         mPropertiesBSFragment = new PropertiesBSFragment();
         mEmojiBSFragment = new EmojiBSFragment();
         mStickerBSFragment = new StickerBSFragment();
         mStickerBSFragment.setStickerListener(this);
         mEmojiBSFragment.setEmojiListener(this);
         mPropertiesBSFragment.setPropertiesChangeListener(this);
-
-        //Typeface mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium);
-        //Typeface mEmojiTypeFace = Typeface.createFromAsset(getAssets(), "emojione-android.ttf");
 
         mPhotoEditor = new PhotoEditor.Builder(this, mPhotoEditorView)
                 .setPinchTextScalable(true) // set flag to make text scalable when pinch
