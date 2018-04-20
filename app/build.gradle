@@ -27,6 +27,3 @@ dependencies {
     //implementation project(':photoeditor')
     implementation 'com.android.support:cardview-v7:27.1.0'
 }
-
-// make sure this line comes *after* you apply the Android plugin
-//apply plugin: 'com.getkeepsafe.dexcount'
